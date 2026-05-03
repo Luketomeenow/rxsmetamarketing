@@ -288,8 +288,7 @@ for(var i=0;i<total;i++){
 }
 function go(n){
   cur=Math.max(0,Math.min(total-1,n));
-  var _w=(slidesEl.querySelector('.slide')||slidesEl).offsetWidth||540;
-  slidesEl.style.transform='translateX(-'+(cur*_w)+'px)';
+  slidesEl.style.transform='translateX(-'+(cur*100)+'%)';
   document.querySelectorAll('.dot').forEach(function(d,i){d.className='dot'+(i===cur?' on':'');});
   countEl.textContent='Slide '+(cur+1)+' of '+total;
 }

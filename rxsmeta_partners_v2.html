@@ -349,8 +349,7 @@ for(var i=0;i<total;i++){
 }
 function go(n){
   cur=Math.max(0,Math.min(total-1,n));
-  var _w=(track.querySelector('.partner-card')||track.querySelector('.card')||track).offsetWidth||540;
-  track.style.transform='translateX(-'+(cur*_w)+'px)';
+  track.style.transform='translateX(-'+(cur*100)+'%)';
   document.querySelectorAll('.pip').forEach(function(p,i){p.className='pip'+(i===cur?' on':'');});
   lbl.textContent=(cur+1)+' / '+total;
 }

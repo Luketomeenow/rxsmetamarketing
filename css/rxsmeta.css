@@ -332,6 +332,21 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Carousels: clip transformed tracks so adjacent slides never “peek” on narrow viewports */
+.fb-ig-root .stage,
+.partners-root .viewport {
+  overflow: hidden;
+  max-width: 100%;
+  isolation: isolate;
+}
+
+.fb-ig-root .slides,
+.partners-root .track {
+  backface-visibility: hidden;
 }
 
 .site-footer {
@@ -698,7 +713,13 @@ a:hover {
 }
 
 @media (max-width: 719px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .site-header__inner {
+    flex-direction: column;
+    align-items: stretch;
     padding: 12px max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
     gap: 12px;
   }
@@ -712,6 +733,17 @@ a:hover {
   .site-nav a {
     padding: 8px 10px;
     font-size: 12px;
+  }
+
+  /* Keep page title/copy above any sticky-header stacking quirks */
+  .layout--sub {
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+  }
+
+  .sub-intro {
+    padding-top: 4px;
   }
 
   .hero__inner {
@@ -736,12 +768,8 @@ a:hover {
     padding: 24px max(16px, env(safe-area-inset-right)) 48px max(16px, env(safe-area-inset-left));
   }
 
-  .layout--sub {
-    padding-top: 20px;
-  }
-
   .carousel-host {
-    padding: 16px 12px 20px;
+    padding: 16px 12px 32px;
     border-radius: var(--radius-md);
     gap: 12px;
   }

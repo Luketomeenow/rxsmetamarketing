@@ -331,10 +331,17 @@ const PARTNERS_LAYOUT_OVERRIDE = `
 
 function patchFbIgScript(html) {
   let out = html;
+  /* Prefer percentage translate so slides stay aligned when sub-pixel widths differ from offsetWidth (fixes mobile “peek” of next slide). */
   if (out.includes("(cur*540)")) {
     out = out.replace(
       "slidesEl.style.transform='translateX(-'+(cur*540)+'px)';",
-      "var _w=(slidesEl.querySelector('.slide')||slidesEl).offsetWidth||540; slidesEl.style.transform='translateX(-'+(cur*_w)+'px)';"
+      "slidesEl.style.transform='translateX(-'+(cur*100)+'%)';"
+    );
+  }
+  if (out.includes("offsetWidth||540")) {
+    out = out.replace(
+      /slidesEl\.style\.transform='translateX\(-'\+\(cur\*[^)]+\)\+'px\)';/,
+      "slidesEl.style.transform='translateX(-'+(cur*100)+'%');"
     );
   }
   if (!out.includes("addEventListener('resize'")) {
@@ -348,7 +355,13 @@ function patchPartnersScript(html) {
   if (out.includes("(cur*540)")) {
     out = out.replace(
       "track.style.transform='translateX(-'+(cur*540)+'px)';",
-      "var _w=(track.querySelector('.partner-card')||track.querySelector('.card')||track).offsetWidth||540; track.style.transform='translateX(-'+(cur*_w)+'px)';"
+      "track.style.transform='translateX(-'+(cur*100)+'%)';"
+    );
+  }
+  if (out.includes("offsetWidth||540")) {
+    out = out.replace(
+      /track\.style\.transform='translateX\(-'\+\(cur\*[^)]+\)\+'px\)';/,
+      "track.style.transform='translateX(-'+(cur*100)+'%');"
     );
   }
   if (!out.includes("addEventListener('resize'")) {
