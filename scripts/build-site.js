@@ -226,13 +226,22 @@ const CAROUSEL_RESPONSIVE_CSS = `
   max-width: 540px;
   margin: 0 auto;
   height: auto;
-  aspect-ratio: 1;
+  aspect-ratio: unset;
+}
+.fb-ig-root .stage {
+  min-height: min(100vw, 540px);
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 .fb-ig-root .slide {
   flex: 0 0 100%;
   width: 100%;
   min-width: 100%;
   height: auto;
+  min-height: min(100vw, 540px);
+  aspect-ratio: unset;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 .fb-ig-root .slides,
 .fb-ig-root .track {

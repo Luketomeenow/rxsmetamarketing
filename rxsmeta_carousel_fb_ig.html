@@ -2,9 +2,9 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 .wrap{background:var(--color-background-secondary);border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:16px;}
-.stage{width:100%;max-width:540px;margin:0 auto;aspect-ratio:1;height:auto;overflow:hidden;border-radius:12px;}
-.slides{display:flex;width:100%;height:100%;transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
-.slide{flex:0 0 100%;width:100%;min-width:100%;aspect-ratio:1;height:auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
+.stage{width:100%;max-width:540px;margin:0 auto;height:auto;min-height:min(100vw,540px);overflow-x:hidden;overflow-y:visible;border-radius:12px;}
+.slides{display:flex;width:100%;height:auto;align-items:stretch;transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
+.slide{flex:0 0 100%;width:100%;min-width:100%;height:auto;min-height:min(100vw,540px);display:flex;flex-direction:column;overflow-x:hidden;overflow-y:visible;position:relative;}
 
 .dots{display:flex;gap:8px;align-items:center;}
 .dot{width:8px;height:8px;border-radius:50%;background:#D3D1C7;cursor:pointer;transition:all 0.2s;}

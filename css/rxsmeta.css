@@ -336,10 +336,11 @@ a:hover {
   overflow-x: hidden;
 }
 
-/* Carousels: clip transformed tracks so adjacent slides never “peek” on narrow viewports */
+/* Carousels: clip horizontal transform only — stage/viewport height follows tallest slide */
 .fb-ig-root .stage,
 .partners-root .viewport {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   max-width: 100%;
   isolation: isolate;
 }
@@ -347,6 +348,26 @@ a:hover {
 .fb-ig-root .slides,
 .partners-root .track {
   backface-visibility: hidden;
+}
+
+/* FB/IG carousel: height follows content (no forced square — avoids clipping tall slides on mobile) */
+.fb-ig-root .stage,
+.fb-ig-root .slides,
+.fb-ig-root .slide {
+  height: auto;
+  aspect-ratio: unset;
+}
+
+.fb-ig-root .stage {
+  min-height: min(100vw, 540px);
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.fb-ig-root .slide {
+  min-height: min(100vw, 540px);
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .site-footer {
@@ -713,10 +734,6 @@ a:hover {
 }
 
 @media (max-width: 719px) {
-  body {
-    overflow-x: hidden;
-  }
-
   .site-header__inner {
     flex-direction: column;
     align-items: stretch;
@@ -726,13 +743,15 @@ a:hover {
 
   .site-nav {
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
     row-gap: 8px;
   }
 
   .site-nav a {
     padding: 8px 10px;
     font-size: 12px;
+    flex: 0 1 auto;
+    text-align: center;
   }
 
   /* Keep page title/copy above any sticky-header stacking quirks */
