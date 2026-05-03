@@ -3,11 +3,11 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font-sans);}
 .shell{background:var(--color-background-secondary);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;align-items:center;}
-.viewport{width:540px;height:580px;overflow:hidden;border-radius:10px;position:relative;}
-.track{display:flex;height:100%;transition:transform 0.45s cubic-bezier(.77,0,.18,1);}
-.card{min-width:540px;height:580px;overflow:hidden;position:relative;}
+.viewport{width:100%;max-width:540px;margin:0 auto;min-height:580px;height:auto;overflow:hidden;border-radius:10px;position:relative;}
+.track{display:flex;height:100%;align-items:stretch;transition:transform 0.45s cubic-bezier(.77,0,.18,1);}
+.card{flex:0 0 100%;width:100%;min-width:100%;min-height:580px;height:auto;overflow:hidden;position:relative;}
 
-.bar{display:flex;align-items:center;gap:10px;width:540px;}
+.bar{display:flex;align-items:center;gap:10px;width:100%;max-width:540px;margin:0 auto;}
 .pip{height:3px;flex:1;border-radius:2px;background:#D3D1C7;cursor:pointer;transition:background 0.2s;}
 .pip.on{background:#E85C2C;}
 .arrows{display:flex;gap:8px;}
@@ -326,7 +326,7 @@ body{font-family:var(--font-sans);}
   </div>
 
   <div class="bar" id="pipbar"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;width:540px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:540px;margin:0 auto;">
     <div class="arrows">
       <div class="arr" onclick="move(-1)">&#8592;</div>
       <div class="arr" onclick="move(1)">&#8594;</div>
@@ -349,9 +349,11 @@ for(var i=0;i<total;i++){
 }
 function go(n){
   cur=Math.max(0,Math.min(total-1,n));
-  track.style.transform='translateX(-'+(cur*540)+'px)';
+  var _w=(track.querySelector('.partner-card')||track.querySelector('.card')||track).offsetWidth||540;
+  track.style.transform='translateX(-'+(cur*_w)+'px)';
   document.querySelectorAll('.pip').forEach(function(p,i){p.className='pip'+(i===cur?' on':'');});
   lbl.textContent=(cur+1)+' / '+total;
 }
 function move(d){go(cur+d);}
+window.addEventListener('resize',function(){go(cur);});
 </script>

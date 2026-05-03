@@ -229,7 +229,10 @@ const CAROUSEL_RESPONSIVE_CSS = `
   aspect-ratio: 1;
 }
 .fb-ig-root .slide {
+  flex: 0 0 100%;
+  width: 100%;
   min-width: 100%;
+  height: auto;
 }
 .fb-ig-root .slides,
 .fb-ig-root .track {
@@ -240,6 +243,16 @@ const CAROUSEL_RESPONSIVE_CSS = `
   width: 100%;
   max-width: 540px;
 }
+.fb-ig-root .nav-row {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.fb-ig-root .slide-count {
+  width: 100%;
+  text-align: center;
+}
+
 .partners-root .shell {
   width: 100%;
   max-width: 540px;
@@ -247,6 +260,48 @@ const CAROUSEL_RESPONSIVE_CSS = `
 .partners-root .bar {
   width: 100% !important;
   max-width: 540px;
+}
+.partners-root .viewport + div[style*="justify-content"] {
+  width: 100% !important;
+  max-width: 540px !important;
+}
+
+@media (max-width: 559px) {
+  .fb-ig-root .s1-headline {
+    font-size: clamp(26px, 8vw, 40px);
+  }
+  .fb-ig-root .s1-content {
+    padding: 28px 20px 24px;
+  }
+  .fb-ig-root .s2-top-content {
+    padding: 24px 20px;
+  }
+  .fb-ig-root .s2-body {
+    padding: 20px;
+  }
+  .fb-ig-root .s2-footer {
+    padding: 0 20px 20px;
+  }
+  .fb-ig-root .s3-content,
+  .fb-ig-root .s4-content,
+  .fb-ig-root .s5-content,
+  .fb-ig-root .s6-content {
+    padding: 28px 20px;
+  }
+  .fb-ig-root .s3-services {
+    grid-template-columns: 1fr;
+  }
+  .fb-ig-root .s4-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .partners-root .partner-card[style*="display:flex"] {
+    flex-direction: column !important;
+  }
+  .partners-root .partner-card [style*="grid-template-columns:1fr 1fr 1fr"],
+  .partners-root .partner-card [style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 `;
 
@@ -266,6 +321,8 @@ const PARTNERS_LAYOUT_OVERRIDE = `
   align-items: stretch;
 }
 .partners-root .partner-card {
+  flex: 0 0 100%;
+  width: 100%;
   min-width: 100%;
   height: auto !important;
   min-height: 580px;
@@ -273,20 +330,30 @@ const PARTNERS_LAYOUT_OVERRIDE = `
 `;
 
 function patchFbIgScript(html) {
-  let out = html.replace(
-    "slidesEl.style.transform='translateX(-'+(cur*540)+'px)';",
-    "var _w=(slidesEl.querySelector('.slide')||slidesEl).offsetWidth||540; slidesEl.style.transform='translateX(-'+(cur*_w)+'px)';"
-  );
-  out = out.trim().replace(/<\/script>\s*$/i, "window.addEventListener('resize',function(){go(cur);});\n</script>");
+  let out = html;
+  if (out.includes("(cur*540)")) {
+    out = out.replace(
+      "slidesEl.style.transform='translateX(-'+(cur*540)+'px)';",
+      "var _w=(slidesEl.querySelector('.slide')||slidesEl).offsetWidth||540; slidesEl.style.transform='translateX(-'+(cur*_w)+'px)';"
+    );
+  }
+  if (!out.includes("addEventListener('resize'")) {
+    out = out.trim().replace(/<\/script>\s*$/i, "window.addEventListener('resize',function(){go(cur);});\n</script>");
+  }
   return out + "\n";
 }
 
 function patchPartnersScript(html) {
-  let out = html.replace(
-    "track.style.transform='translateX(-'+(cur*540)+'px)';",
-    "var _w=(track.querySelector('.partner-card')||track).offsetWidth||540; track.style.transform='translateX(-'+(cur*_w)+'px)';"
-  );
-  out = out.trim().replace(/<\/script>\s*$/i, "window.addEventListener('resize',function(){go(cur);});\n</script>");
+  let out = html;
+  if (out.includes("(cur*540)")) {
+    out = out.replace(
+      "track.style.transform='translateX(-'+(cur*540)+'px)';",
+      "var _w=(track.querySelector('.partner-card')||track.querySelector('.card')||track).offsetWidth||540; track.style.transform='translateX(-'+(cur*_w)+'px)';"
+    );
+  }
+  if (!out.includes("addEventListener('resize'")) {
+    out = out.trim().replace(/<\/script>\s*$/i, "window.addEventListener('resize',function(){go(cur);});\n</script>");
+  }
   return out + "\n";
 }
 
