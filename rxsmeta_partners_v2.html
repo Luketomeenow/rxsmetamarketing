@@ -1,0 +1,357 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);}
+.shell{background:var(--color-background-secondary);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;align-items:center;}
+.viewport{width:540px;height:580px;overflow:hidden;border-radius:10px;position:relative;}
+.track{display:flex;height:100%;transition:transform 0.45s cubic-bezier(.77,0,.18,1);}
+.card{min-width:540px;height:580px;overflow:hidden;position:relative;}
+
+.bar{display:flex;align-items:center;gap:10px;width:540px;}
+.pip{height:3px;flex:1;border-radius:2px;background:#D3D1C7;cursor:pointer;transition:background 0.2s;}
+.pip.on{background:#E85C2C;}
+.arrows{display:flex;gap:8px;}
+.arr{width:32px;height:32px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-primary);font-size:14px;}
+.arr:hover{background:var(--color-background-secondary);}
+.slide-lbl{font-size:12px;color:var(--color-text-secondary);min-width:40px;text-align:right;}
+</style>
+
+<h2 style="position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden;">RXS Meta brand partners portfolio carousel — 9 slides covering 7 tech partners</h2>
+
+<div class="shell">
+  <div class="viewport">
+    <div class="track" id="track">
+
+      <!-- ======= SLIDE 0: COVER — full bleed split layout ======= -->
+      <div class="card" style="background:#F5F3EE;display:flex;">
+        <div style="width:8px;background:#E85C2C;flex-shrink:0;"></div>
+        <div style="flex:1;padding:48px 44px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;letter-spacing:0.16em;color:#E85C2C;text-transform:uppercase;font-weight:500;margin-bottom:20px;">RXS Meta · Partner Network</div>
+            <div style="font-size:13px;color:#888;font-weight:400;margin-bottom:8px;">Go-to business portfolio</div>
+            <div style="font-size:44px;font-weight:500;color:#111;line-height:1.05;letter-spacing:-0.02em;">Our Brand<br>Partners.</div>
+            <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#E85C2C;"></div>
+                <div style="font-size:13px;color:#444;">ServeDeck — Facilities Management</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#E85C2C;"></div>
+                <div style="font-size:13px;color:#444;">Corsight AI — Facial Intelligence</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#E85C2C;"></div>
+                <div style="font-size:13px;color:#444;">ECO-OS — ESG Intelligence</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#E85C2C;"></div>
+                <div style="font-size:13px;color:#444;">Glem AI — Enterprise AI Platform</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#E85C2C;"></div>
+                <div style="font-size:13px;color:#444;">Roxas Management Consultancy</div>
+              </div>
+            </div>
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+              <div style="font-size:11px;color:#AAA;margin-top:4px;">Opportunistic portfolio</div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:1px;background:#CCC;"></div>
+                <div style="font-size:13px;color:#888;">KMS Lighthouse · BigID</div>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:#AAA;">rxsmeta.com</div>
+        </div>
+        <div style="width:180px;background:#111;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 28px;gap:20px;">
+          <div style="width:60px;height:60px;border-radius:50%;border:1.5px solid #E85C2C;display:flex;align-items:center;justify-content:center;">
+            <div style="font-size:11px;font-weight:500;color:#E85C2C;text-align:center;line-height:1.3;">7<br>Partners</div>
+          </div>
+          <div style="font-size:11px;color:#555;line-height:1.7;">Innovating<br>with purpose.</div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 1: SERVEDECK — horizontal info strip ======= -->
+      <div class="card" style="background:#0A2240;display:flex;flex-direction:column;">
+        <div style="padding:44px 44px 0;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <div style="font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;">Go-To · 01 of 05</div>
+                <div style="font-size:40px;font-weight:500;color:#fff;line-height:1.1;margin-top:10px;letter-spacing:-0.01em;">ServeDeck</div>
+                <div style="font-size:14px;color:rgba(255,255,255,0.45);margin-top:6px;">Facilities Management System</div>
+              </div>
+              <div style="width:52px;height:52px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;border:0.5px solid rgba(255,255,255,0.1);">
+                <div style="font-size:18px;font-weight:500;color:#fff;">SD</div>
+              </div>
+            </div>
+            <div style="margin-top:32px;font-size:15px;color:rgba(255,255,255,0.75);line-height:1.75;max-width:380px;">A smart cloud-based CMMS platform that transforms how facilities teams manage maintenance, assets, and operations — all from one unified dashboard.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;margin-bottom:44px;">
+            <div style="background:#0A2240;padding:16px 18px;">
+              <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Category</div>
+              <div style="font-size:13px;font-weight:500;color:#fff;">SaaS / CMMS</div>
+            </div>
+            <div style="background:#0A2240;padding:16px 18px;">
+              <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Best for</div>
+              <div style="font-size:13px;font-weight:500;color:#fff;">Hotels, Malls, Campuses</div>
+            </div>
+            <div style="background:#0A2240;padding:16px 18px;">
+              <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Website</div>
+              <div style="font-size:13px;font-weight:500;color:#E85C2C;">servedeck.com</div>
+            </div>
+          </div>
+        </div>
+        <div style="height:6px;background:#E85C2C;"></div>
+      </div>
+
+      <!-- ======= SLIDE 2: CORSIGHT — editorial quote style ======= -->
+      <div class="card" style="background:#F5F3EE;display:flex;flex-direction:column;">
+        <div style="height:6px;background:#111;"></div>
+        <div style="padding:44px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:10px;letter-spacing:0.14em;color:#888;text-transform:uppercase;font-weight:500;">Go-To · 02 of 05</div>
+            <div style="padding:5px 14px;border-radius:20px;background:#111;">
+              <div style="font-size:11px;font-weight:500;color:#fff;">Facial Intelligence</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:48px;font-weight:500;color:#111;line-height:1.0;letter-spacing:-0.02em;">Corsight<br>AI</div>
+            <div style="width:40px;height:3px;background:#E85C2C;margin:20px 0;border-radius:2px;"></div>
+            <div style="font-size:15px;color:#555;line-height:1.75;max-width:400px;">The world's most accurate facial recognition platform — powered by Autonomous AI with 250+ patents. Deployed across 50+ countries for aviation, law enforcement, and retail security.</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="padding:7px 16px;border-radius:6px;background:#111;">
+              <div style="font-size:12px;font-weight:500;color:#fff;">Real-time ID</div>
+            </div>
+            <div style="padding:7px 16px;border-radius:6px;background:#EEECEA;">
+              <div style="font-size:12px;font-weight:500;color:#444;">Privacy-by-design</div>
+            </div>
+            <div style="padding:7px 16px;border-radius:6px;background:#EEECEA;">
+              <div style="font-size:12px;font-weight:500;color:#444;">GDPR compliant</div>
+            </div>
+            <div style="padding:7px 16px;border-radius:6px;background:#EEECEA;">
+              <div style="font-size:12px;font-weight:500;color:#444;">corsight.ai</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 3: ECO-OS — left panel accent ======= -->
+      <div class="card" style="background:#fff;display:flex;">
+        <div style="width:200px;background:#1D9E75;flex-shrink:0;padding:40px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.55);text-transform:uppercase;font-weight:500;margin-bottom:20px;">Go-To · 03</div>
+            <div style="font-size:30px;font-weight:500;color:#fff;line-height:1.1;">ECO-OS</div>
+            <div style="width:30px;height:2px;background:rgba(255,255,255,0.4);margin:16px 0;border-radius:2px;"></div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.65;">Intelligent Sustainability Platform</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">ecoos.co</div>
+          </div>
+        </div>
+        <div style="flex:1;padding:40px 36px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:13px;color:#888;margin-bottom:16px;">ESG reporting made measurable</div>
+            <div style="font-size:15px;color:#222;line-height:1.75;">A cloud-based ESG accounting and intelligence platform that turns sustainability from a compliance burden into a strategic business advantage.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-top:5px;flex-shrink:0;"></div>
+              <div style="font-size:13px;color:#444;line-height:1.5;">Aligns with CSRD, GRI, IFRS, SASB, CDP frameworks</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-top:5px;flex-shrink:0;"></div>
+              <div style="font-size:13px;color:#444;line-height:1.5;">Scope 1, 2, 3 emissions tracking and supply chain data</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-top:5px;flex-shrink:0;"></div>
+              <div style="font-size:13px;color:#444;line-height:1.5;">Improves EcoVadis, CDP, Sustainalytics scores</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:#BBB;">rxsmeta.com · ECO-OS</div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 4: GLEM AI — dark grid layout ======= -->
+      <div class="card" style="background:#111;display:flex;flex-direction:column;padding:44px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;">
+          <div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;">Go-To · 04 of 05</div>
+            <div style="font-size:42px;font-weight:500;color:#fff;line-height:1.05;margin-top:10px;letter-spacing:-0.02em;">Glem AI</div>
+            <div style="font-size:13px;color:#555;margin-top:6px;">Enterprise AI Platform · glem.ai</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:11px;color:#555;margin-bottom:6px;">Expanded to PH</div>
+            <div style="font-size:22px;font-weight:500;color:#E85C2C;">2024</div>
+          </div>
+        </div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.75;margin-bottom:28px;">One platform to orchestrate data, deploy AI agents, automate complex workflows, and visualize insights — with zero vendor lock-in and enterprise-grade security.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;">
+          <div style="border:0.5px solid #2A2A2A;border-radius:8px;padding:16px;">
+            <div style="font-size:11px;color:#555;margin-bottom:6px;">Core capability</div>
+            <div style="font-size:13px;font-weight:500;color:#fff;">Multi-model AI orchestration</div>
+          </div>
+          <div style="border:0.5px solid #2A2A2A;border-radius:8px;padding:16px;">
+            <div style="font-size:11px;color:#555;margin-bottom:6px;">Integrations</div>
+            <div style="font-size:13px;font-weight:500;color:#fff;">100+ SaaS + legacy systems</div>
+          </div>
+          <div style="border:0.5px solid #2A2A2A;border-radius:8px;padding:16px;">
+            <div style="font-size:11px;color:#555;margin-bottom:6px;">Security</div>
+            <div style="font-size:13px;font-weight:500;color:#fff;">ISO 27001 · SOC 2 · HIPAA</div>
+          </div>
+          <div style="border:0.5px solid #E85C2C;border-radius:8px;padding:16px;background:rgba(232,92,44,0.06);">
+            <div style="font-size:11px;color:#E85C2C;margin-bottom:6px;">Why it matters</div>
+            <div style="font-size:13px;font-weight:500;color:#fff;">AI without vendor dependency</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 5: RXS META — centered brand statement ======= -->
+      <div class="card" style="background:#E85C2C;display:flex;flex-direction:column;">
+        <div style="flex:1;padding:44px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;justify-content:space-between;">
+            <div style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.6);text-transform:uppercase;font-weight:500;">Go-To · 05 of 05</div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.6);text-transform:uppercase;font-weight:500;">The anchor</div>
+          </div>
+          <div style="text-align:center;padding:0 20px;">
+            <div style="width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.3);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:16px;font-weight:500;color:#fff;">RXS</div>
+            </div>
+            <div style="font-size:32px;font-weight:500;color:#fff;line-height:1.2;letter-spacing:-0.01em;">Roxas Management<br>Consultancy</div>
+            <div style="width:32px;height:2px;background:rgba(255,255,255,0.4);margin:20px auto;border-radius:2px;"></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.75;">Strategic consulting for digital transformation, business development, customer loyalty, and AI-powered operations — the hub that connects and activates every partner in this portfolio.</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:13px;color:rgba(255,255,255,0.6);">rxsmeta.com · BGC, Taguig City</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 6: SECTION BREAK — Opportunistic ======= -->
+      <div class="card" style="background:#F5F3EE;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:44px;text-align:center;position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#D3D1C7 0,#D3D1C7 8px,transparent 8px,transparent 16px);"></div>
+        <div style="font-size:10px;letter-spacing:0.16em;color:#AAA;text-transform:uppercase;font-weight:500;margin-bottom:24px;">Next section</div>
+        <div style="font-size:40px;font-weight:500;color:#111;line-height:1.1;letter-spacing:-0.02em;">Opportunistic<br>Portfolio</div>
+        <div style="width:40px;height:2px;background:#E85C2C;margin:24px auto;border-radius:2px;"></div>
+        <div style="font-size:14px;color:#888;line-height:1.75;max-width:340px;">High-value partnerships in knowledge management and enterprise data intelligence — poised for deeper integration as client needs grow.</div>
+        <div style="margin-top:32px;display:flex;gap:16px;">
+          <div style="padding:10px 20px;border-radius:6px;background:#111;">
+            <div style="font-size:12px;font-weight:500;color:#fff;">KMS Lighthouse</div>
+          </div>
+          <div style="padding:10px 20px;border-radius:6px;background:#111;">
+            <div style="font-size:12px;font-weight:500;color:#fff;">BigID</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 7: KMS LIGHTHOUSE — tall stat bar style ======= -->
+      <div class="card" style="background:#fff;display:flex;flex-direction:column;">
+        <div style="background:#1A1A2E;height:260px;padding:40px 44px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
+          <div style="position:absolute;right:-20px;top:-20px;width:140px;height:140px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.06);"></div>
+          <div style="position:absolute;right:20px;bottom:-40px;width:200px;height:200px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.04);"></div>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;">Opportunistic · 01</div>
+            <div style="font-size:38px;font-weight:500;color:#fff;line-height:1.05;margin-top:12px;letter-spacing:-0.01em;">KMS<br>Lighthouse</div>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);">Enterprise Knowledge Management · kmslh.com</div>
+        </div>
+        <div style="padding:28px 44px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="font-size:14px;color:#444;line-height:1.75;">AI-powered knowledge management that cuts agent handling time by up to 40% and gets new hires fully productive in 90 days instead of 6 months.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#F5F3EE;border-radius:8px;padding:14px 16px;">
+              <div style="font-size:20px;font-weight:500;color:#111;">40%+</div>
+              <div style="font-size:11px;color:#888;margin-top:2px;">Faster first call resolution</div>
+            </div>
+            <div style="background:#F5F3EE;border-radius:8px;padding:14px 16px;">
+              <div style="font-size:20px;font-weight:500;color:#111;">Top 3</div>
+              <div style="font-size:11px;color:#888;margin-top:2px;">Forrester Wave leader</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:#CCC;">rxsmeta.com · KMS Lighthouse</div>
+        </div>
+      </div>
+
+      <!-- ======= SLIDE 8: BIGID — bold accent style ======= -->
+      <div class="card" style="background:#111;display:flex;">
+        <div style="flex:1;padding:44px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;">Opportunistic · 02 of 02</div>
+            <div style="font-size:44px;font-weight:500;color:#fff;line-height:1.0;margin-top:12px;letter-spacing:-0.02em;">BigID</div>
+            <div style="font-size:13px;color:#555;margin-top:6px;">Data Security & AI Governance · bigid.com</div>
+            <div style="width:36px;height:2px;background:#E85C2C;margin:22px 0;border-radius:2px;"></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.8;">The enterprise-grade platform for discovering, classifying, and protecting sensitive data across cloud, on-prem, and AI systems — trusted by Fortune 500 companies and named a Forrester Wave Leader.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:11px;color:#555;margin-bottom:2px;">Core capabilities</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <div style="padding:5px 12px;border-radius:4px;background:#1E1E1E;border:0.5px solid #2A2A2A;">
+                <div style="font-size:11px;color:#AAA;">DSPM</div>
+              </div>
+              <div style="padding:5px 12px;border-radius:4px;background:#1E1E1E;border:0.5px solid #2A2A2A;">
+                <div style="font-size:11px;color:#AAA;">Data Privacy</div>
+              </div>
+              <div style="padding:5px 12px;border-radius:4px;background:#1E1E1E;border:0.5px solid #2A2A2A;">
+                <div style="font-size:11px;color:#AAA;">AI Governance</div>
+              </div>
+              <div style="padding:5px 12px;border-radius:4px;background:#1E1E1E;border:0.5px solid #2A2A2A;">
+                <div style="font-size:11px;color:#AAA;">DLP</div>
+              </div>
+              <div style="padding:5px 12px;border-radius:4px;background:rgba(232,92,44,0.12);border:0.5px solid #E85C2C;">
+                <div style="font-size:11px;color:#E85C2C;">100+ languages</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:#444;margin-top:6px;">rxsmeta.com · BigID</div>
+          </div>
+        </div>
+        <div style="width:8px;background:#E85C2C;flex-shrink:0;"></div>
+      </div>
+
+      <!-- ======= SLIDE 9: CLOSING CTA ======= -->
+      <div class="card" style="background:#E85C2C;display:flex;flex-direction:column;justify-content:space-between;padding:44px;">
+        <div style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.55);text-transform:uppercase;font-weight:500;">RXS Meta · Partner Network</div>
+        <div>
+          <div style="font-size:38px;font-weight:500;color:#fff;line-height:1.1;letter-spacing:-0.01em;">7 partners.<br>One vision.</div>
+          <div style="width:40px;height:2px;background:rgba(255,255,255,0.4);margin:22px 0;border-radius:2px;"></div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.75;max-width:360px;">RXS Meta brings these world-class technologies together with expert consulting to deliver AI-driven, ESG-focused transformation for Philippine and ASEAN businesses.</div>
+        </div>
+        <div>
+          <div style="display:inline-block;padding:12px 28px;border-radius:30px;background:#fff;margin-bottom:18px;">
+            <div style="font-size:13px;font-weight:500;color:#E85C2C;">Schedule a consultation</div>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.55);">rxsmeta.com · info@rxsmeta.com · @rxsmeta</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bar" id="pipbar"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;width:540px;">
+    <div class="arrows">
+      <div class="arr" onclick="move(-1)">&#8592;</div>
+      <div class="arr" onclick="move(1)">&#8594;</div>
+    </div>
+    <div class="slide-lbl" id="lbl">1 / 10</div>
+  </div>
+</div>
+
+<script>
+var cur=0,total=10;
+var bar=document.getElementById('pipbar');
+var lbl=document.getElementById('lbl');
+var track=document.getElementById('track');
+for(var i=0;i<total;i++){
+  var p=document.createElement('div');
+  p.className='pip'+(i===0?' on':'');
+  p.setAttribute('data-i',i);
+  p.onclick=function(){go(+this.getAttribute('data-i'));};
+  bar.appendChild(p);
+}
+function go(n){
+  cur=Math.max(0,Math.min(total-1,n));
+  track.style.transform='translateX(-'+(cur*540)+'px)';
+  document.querySelectorAll('.pip').forEach(function(p,i){p.className='pip'+(i===cur?' on':'');});
+  lbl.textContent=(cur+1)+' / '+total;
+}
+function move(d){go(cur+d);}
+</script>

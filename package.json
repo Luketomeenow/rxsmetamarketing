@@ -1,0 +1,8 @@
+{
+  "name": "rxsmeta-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-site.js",
+    "serve": "npx --yes serve site -l 8080"
+  }
+}

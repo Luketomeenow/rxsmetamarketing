@@ -1,0 +1,296 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{background:var(--color-background-secondary);border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:16px;}
+.stage{width:540px;height:540px;overflow:hidden;border-radius:12px;}
+.slides{display:flex;width:100%;height:100%;transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
+.slide{min-width:540px;height:540px;display:flex;flex-direction:column;overflow:hidden;position:relative;}
+
+.dots{display:flex;gap:8px;align-items:center;}
+.dot{width:8px;height:8px;border-radius:50%;background:#D3D1C7;cursor:pointer;transition:all 0.2s;}
+.dot.on{background:#E85C2C;width:24px;border-radius:4px;}
+
+.nav-row{display:flex;align-items:center;gap:20px;}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--color-text-primary);}
+.nav-btn:hover{background:var(--color-background-secondary);}
+.slide-count{font-size:13px;color:var(--color-text-secondary);font-family:var(--font-sans);}
+
+.geo{position:absolute;border-radius:50%;}
+
+.s1-bg{background:#111111;}
+.s1 .geo-1{width:260px;height:260px;background:#E85C2C;right:-40px;top:-40px;border-radius:50%;}
+.s1 .geo-2{width:180px;height:180px;background:#333;bottom:60px;left:-40px;border-radius:50%;}
+.s1 .geo-3{width:100px;height:100px;background:#E85C2C;opacity:0.3;bottom:180px;right:80px;border-radius:50%;}
+.s1-content{position:relative;z-index:2;padding:44px 44px 36px;display:flex;flex-direction:column;height:100%;justify-content:space-between;}
+.s1-tag{font-size:11px;font-weight:500;letter-spacing:0.12em;color:#E85C2C;text-transform:uppercase;font-family:var(--font-sans);}
+.s1-headline{font-size:40px;font-weight:500;color:#FFFFFF;line-height:1.1;font-family:var(--font-sans);margin-top:12px;}
+.s1-sub{font-size:14px;color:#AAAAAA;line-height:1.6;font-family:var(--font-sans);margin-top:10px;max-width:280px;}
+.s1-footer{display:flex;justify-content:space-between;align-items:flex-end;}
+.s1-brand{font-size:13px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);}
+.s1-num{font-size:48px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);line-height:1;}
+
+.s2-bg{background:#FFFFFF;}
+.s2-top{background:#111111;height:200px;position:relative;overflow:hidden;}
+.s2-top .geo-a{width:140px;height:140px;background:#E85C2C;border-radius:50%;right:-20px;top:-20px;}
+.s2-top .geo-b{width:80px;height:80px;background:#E85C2C;opacity:0.25;border-radius:50%;left:60px;bottom:-20px;}
+.s2-top-content{position:absolute;z-index:2;padding:32px 40px;bottom:0;}
+.s2-top-label{font-size:10px;letter-spacing:0.14em;color:#E85C2C;font-weight:500;text-transform:uppercase;font-family:var(--font-sans);}
+.s2-top-title{font-size:28px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);line-height:1.2;}
+.s2-body{padding:28px 40px;display:flex;flex-direction:column;gap:16px;}
+.s2-row{display:flex;gap:14px;align-items:flex-start;}
+.s2-dot{min-width:8px;height:8px;border-radius:50%;background:#E85C2C;margin-top:5px;}
+.s2-item-title{font-size:14px;font-weight:500;color:#111111;font-family:var(--font-sans);}
+.s2-item-desc{font-size:12px;color:#666;line-height:1.5;font-family:var(--font-sans);margin-top:2px;}
+.s2-footer{margin-top:auto;padding:0 40px 28px;display:flex;justify-content:space-between;align-items:center;}
+.s2-brand{font-size:11px;color:#999;font-family:var(--font-sans);}
+.s2-num{font-size:13px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);}
+
+.s3-bg{background:#E85C2C;}
+.s3-content{position:relative;z-index:2;padding:44px;display:flex;flex-direction:column;height:100%;justify-content:space-between;}
+.s3 .geo-x{width:300px;height:300px;background:#CF4A1E;border-radius:50%;right:-60px;bottom:-60px;}
+.s3 .geo-y{width:120px;height:120px;background:#CF4A1E;border-radius:50%;left:20px;top:20px;opacity:0.4;}
+.s3-label{font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.7);text-transform:uppercase;font-weight:500;font-family:var(--font-sans);}
+.s3-big{font-size:36px;font-weight:500;color:#FFFFFF;line-height:1.15;font-family:var(--font-sans);margin-top:8px;}
+.s3-services{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+.s3-chip{background:rgba(255,255,255,0.15);border-radius:6px;padding:10px 14px;}
+.s3-chip-title{font-size:12px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);}
+.s3-chip-sub{font-size:11px;color:rgba(255,255,255,0.7);font-family:var(--font-sans);margin-top:2px;}
+.s3-footer{display:flex;justify-content:space-between;align-items:center;}
+.s3-brand{font-size:11px;color:rgba(255,255,255,0.6);font-family:var(--font-sans);}
+.s3-num{font-size:13px;font-weight:500;color:#fff;font-family:var(--font-sans);}
+
+.s4-bg{background:#F5F4F0;}
+.s4-content{padding:44px;display:flex;flex-direction:column;height:100%;justify-content:space-between;}
+.s4-label{font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;font-family:var(--font-sans);}
+.s4-title{font-size:30px;font-weight:500;color:#111111;font-family:var(--font-sans);line-height:1.2;margin-top:8px;}
+.s4-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.s4-stat{background:#FFFFFF;border-radius:10px;padding:18px 16px;}
+.s4-stat-val{font-size:28px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);line-height:1;}
+.s4-stat-lbl{font-size:11px;color:#666;font-family:var(--font-sans);margin-top:4px;line-height:1.4;}
+.s4-footer{display:flex;justify-content:space-between;align-items:center;}
+.s4-brand{font-size:11px;color:#999;font-family:var(--font-sans);}
+.s4-num{font-size:13px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);}
+
+.s5-bg{background:#111111;}
+.s5 .geo-p{width:200px;height:200px;background:#E85C2C;border-radius:50%;left:-40px;top:-40px;}
+.s5 .geo-q{width:120px;height:120px;background:#333;border-radius:50%;right:40px;top:160px;}
+.s5-content{position:relative;z-index:2;padding:44px;display:flex;flex-direction:column;height:100%;justify-content:space-between;}
+.s5-label{font-size:10px;letter-spacing:0.14em;color:#E85C2C;text-transform:uppercase;font-weight:500;font-family:var(--font-sans);}
+.s5-title{font-size:30px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);line-height:1.2;margin-top:8px;}
+.s5-pillars{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.s5-pillar{display:flex;align-items:center;gap:12px;}
+.s5-bar{height:3px;background:#E85C2C;border-radius:2px;}
+.s5-pillar-text{font-size:13px;color:#CCCCCC;font-family:var(--font-sans);}
+.s5-footer{display:flex;justify-content:space-between;align-items:center;}
+.s5-brand{font-size:11px;color:#666;font-family:var(--font-sans);}
+.s5-num{font-size:13px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);}
+
+.s6-bg{background:#E85C2C;}
+.s6 .geo-r{width:260px;height:260px;background:#CF4A1E;border-radius:50%;right:-60px;top:-60px;}
+.s6-content{position:relative;z-index:2;padding:44px;display:flex;flex-direction:column;height:100%;justify-content:center;gap:20px;}
+.s6-label{font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.7);text-transform:uppercase;font-weight:500;font-family:var(--font-sans);}
+.s6-cta{font-size:36px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);line-height:1.2;}
+.s6-sub{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;font-family:var(--font-sans);max-width:340px;}
+.s6-btn{background:#FFFFFF;border-radius:30px;padding:12px 28px;display:inline-block;margin-top:6px;width:fit-content;}
+.s6-btn-text{font-size:13px;font-weight:500;color:#E85C2C;font-family:var(--font-sans);}
+.s6-contact{font-size:12px;color:rgba(255,255,255,0.6);font-family:var(--font-sans);margin-top:16px;}
+.s6-contact span{color:#fff;font-weight:500;}
+.s6-handle{font-size:13px;font-weight:500;color:#FFFFFF;font-family:var(--font-sans);}
+</style>
+
+<h2 class="sr-only">RXS Meta Group of Companies — 6-slide Facebook and Instagram carousel: who, what, and why</h2>
+
+<div class="wrap">
+  <div class="stage">
+    <div class="slides" id="slides">
+
+      <div class="slide s1 s1-bg">
+        <div class="geo geo-1"></div>
+        <div class="geo geo-2"></div>
+        <div class="geo geo-3"></div>
+        <div class="s1-content">
+          <div>
+            <div class="s1-tag">RXS Meta Group of Companies</div>
+            <div class="s1-headline">Innovating<br>with<br>Purpose.</div>
+            <div class="s1-sub">AI-Driven. ESG-Focused. Built for the future of Philippine business.</div>
+          </div>
+          <div class="s1-footer">
+            <div class="s1-brand">rxsmeta.com</div>
+            <div class="s1-num">01</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide s2-bg" style="flex-direction:column;">
+        <div class="s2-top">
+          <div class="geo geo-a"></div>
+          <div class="geo geo-b"></div>
+          <div class="s2-top-content">
+            <div class="s2-top-label">Who we are</div>
+            <div class="s2-top-title">A tech-forward<br>consultancy from BGC</div>
+          </div>
+        </div>
+        <div class="s2-body">
+          <div class="s2-row">
+            <div class="s2-dot"></div>
+            <div><div class="s2-item-title">Roxas Management Consultancy</div><div class="s2-item-desc">Strategic consulting for business transformation — from operations to market expansion.</div></div>
+          </div>
+          <div class="s2-row">
+            <div class="s2-dot"></div>
+            <div><div class="s2-item-title">Led by Yen Roxas</div><div class="s2-item-desc">Entrepreneur, advocate, and tech visionary — driving purposeful growth across industries.</div></div>
+          </div>
+          <div class="s2-row">
+            <div class="s2-dot"></div>
+            <div><div class="s2-item-title">Headquartered in BGC, Taguig</div><div class="s2-item-desc">Serving Philippine and Southeast Asian businesses with enterprise-grade solutions.</div></div>
+          </div>
+        </div>
+        <div class="s2-footer">
+          <div class="s2-brand">rxsmeta.com</div>
+          <div class="s2-num">02 / 06</div>
+        </div>
+      </div>
+
+      <div class="slide s3 s3-bg">
+        <div class="geo geo-x"></div>
+        <div class="geo geo-y"></div>
+        <div class="s3-content">
+          <div>
+            <div class="s3-label">What we do</div>
+            <div class="s3-big">Two powerful<br>service pillars.</div>
+          </div>
+          <div class="s3-services">
+            <div class="s3-chip">
+              <div class="s3-chip-title">Consulting</div>
+              <div class="s3-chip-sub">Strategy, business development, project management, loyalty programs</div>
+            </div>
+            <div class="s3-chip">
+              <div class="s3-chip-title">Technology</div>
+              <div class="s3-chip-sub">AI, SaaS platforms, AR/VR, blockchain, metaverse solutions</div>
+            </div>
+            <div class="s3-chip">
+              <div class="s3-chip-title">SaaS Products</div>
+              <div class="s3-chip-sub">Hotel, school, facilities and procurement management systems</div>
+            </div>
+            <div class="s3-chip">
+              <div class="s3-chip-title">Custom Builds</div>
+              <div class="s3-chip-sub">Photo AI, video AI, NFT solutions, and bespoke digital tools</div>
+            </div>
+          </div>
+          <div class="s3-footer">
+            <div class="s3-brand">rxsmeta.com</div>
+            <div class="s3-num">03 / 06</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide s4 s4-bg">
+        <div class="s4-content">
+          <div>
+            <div class="s4-label">The ESG edge</div>
+            <div class="s4-title">Profit and purpose<br>are not opposites.</div>
+          </div>
+          <div class="s4-stats">
+            <div class="s4-stat">
+              <div class="s4-stat-val">AI</div>
+              <div class="s4-stat-lbl">Powered operations and decision-making</div>
+            </div>
+            <div class="s4-stat">
+              <div class="s4-stat-val">ESG</div>
+              <div class="s4-stat-lbl">Focused strategy for long-term impact</div>
+            </div>
+            <div class="s4-stat">
+              <div class="s4-stat-val">SaaS</div>
+              <div class="s4-stat-lbl">Scalable systems without heavy CAPEX</div>
+            </div>
+            <div class="s4-stat">
+              <div class="s4-stat-val">PH+</div>
+              <div class="s4-stat-lbl">Built for Philippine and ASEAN context</div>
+            </div>
+          </div>
+          <div class="s4-footer">
+            <div class="s4-brand">rxsmeta.com</div>
+            <div class="s4-num">04 / 06</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide s5 s5-bg">
+        <div class="geo geo-p"></div>
+        <div class="geo geo-q"></div>
+        <div class="s5-content">
+          <div>
+            <div class="s5-label">Why RXS Meta</div>
+            <div class="s5-title">We advocate for the<br>businesses we build.</div>
+          </div>
+          <div class="s5-pillars">
+            <div class="s5-pillar">
+              <div class="s5-bar" style="width:40px;"></div>
+              <div class="s5-pillar-text">Public awareness and responsible media engagement</div>
+            </div>
+            <div class="s5-pillar">
+              <div class="s5-bar" style="width:60px;"></div>
+              <div class="s5-pillar-text">Education and health advocacy through smart campus tech</div>
+            </div>
+            <div class="s5-pillar">
+              <div class="s5-bar" style="width:50px;"></div>
+              <div class="s5-pillar-text">Environmental sustainability and conservation</div>
+            </div>
+            <div class="s5-pillar">
+              <div class="s5-bar" style="width:70px;"></div>
+              <div class="s5-pillar-text">Community empowerment and nation building</div>
+            </div>
+            <div class="s5-pillar">
+              <div class="s5-bar" style="width:45px;"></div>
+              <div class="s5-pillar-text">Responsible motorcycle tourism across the Philippines</div>
+            </div>
+          </div>
+          <div class="s5-footer">
+            <div class="s5-brand">rxsmeta.com</div>
+            <div class="s5-num">05 / 06</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide s6 s6-bg">
+        <div class="geo geo-r"></div>
+        <div class="s6-content">
+          <div class="s6-label">Let's build together</div>
+          <div class="s6-cta">Ready to make your business smarter?</div>
+          <div class="s6-sub">Whether you need AI systems, SaaS implementation, ESG strategy, or full digital transformation — RXS Meta delivers with purpose.</div>
+          <div class="s6-btn"><div class="s6-btn-text">Schedule a consultation</div></div>
+          <div class="s6-contact">Visit <span>rxsmeta.com</span> or email <span>info@rxsmeta.com</span></div>
+          <div style="margin-top:8px;"><div class="s6-handle">@rxsmeta</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="move(-1)">&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav-btn" onclick="move(1)">&#8594;</button>
+  </div>
+  <div class="slide-count" id="count">Slide 1 of 6</div>
+</div>
+
+<script>
+var cur=0,total=6;
+var dotsEl=document.getElementById('dots');
+var countEl=document.getElementById('count');
+var slidesEl=document.getElementById('slides');
+for(var i=0;i<total;i++){
+  var d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.setAttribute('data-i',i);
+  d.onclick=function(){go(+this.getAttribute('data-i'));};
+  dotsEl.appendChild(d);
+}
+function go(n){
+  cur=Math.max(0,Math.min(total-1,n));
+  slidesEl.style.transform='translateX(-'+(cur*540)+'px)';
+  document.querySelectorAll('.dot').forEach(function(d,i){d.className='dot'+(i===cur?' on':'');});
+  countEl.textContent='Slide '+(cur+1)+' of '+total;
+}
+function move(d){go(cur+d);}
+</script>

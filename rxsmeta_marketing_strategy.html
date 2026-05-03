@@ -1,0 +1,387 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); color: var(--color-text-primary); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+  .nav { display: flex; gap: 6px; flex-wrap: wrap; padding: 1rem 0 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+  .nav-btn { padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); font-size: 13px; cursor: pointer; background: transparent; color: var(--color-text-secondary); transition: all 0.15s; }
+  .nav-btn.active { background: #E85C2C; color: #fff; border-color: #E85C2C; }
+  .nav-btn:hover:not(.active) { background: var(--color-background-secondary); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .section-label { font-size: 11px; font-weight: 500; color: #E85C2C; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .headline { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtext { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .card-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .card-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+
+  .pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px; }
+  .pill-orange { background: #FAECE7; color: #993C1D; }
+  .pill-teal { background: #E1F5EE; color: #0F6E56; }
+  .pill-blue { background: #E6F1FB; color: #185FA5; }
+  .pill-purple { background: #EEEDFE; color: #534AB7; }
+  .pill-gray { background: #F1EFE8; color: #5F5E5A; }
+
+  .accent-bar { width: 32px; height: 3px; background: #E85C2C; border-radius: 2px; margin-bottom: 1rem; }
+
+  .metric-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
+  .metric-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .metric-lbl { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  .step { display: flex; gap: 14px; margin-bottom: 1.25rem; align-items: flex-start; }
+  .step-num { min-width: 28px; height: 28px; border-radius: 50%; background: #E85C2C; color: #fff; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-content .step-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .step-content .step-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+
+  .tool-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .tool-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .tool-name { font-size: 14px; font-weight: 500; }
+  .tool-cat { font-size: 11px; color: var(--color-text-secondary); }
+  .tool-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+
+  .priority-high { border-left: 3px solid #E85C2C; }
+  .priority-med { border-left: 3px solid #EF9F27; }
+  .priority-low { border-left: 3px solid #1D9E75; }
+
+  .kpi-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  .kpi-table th { text-align: left; padding: 8px 10px; font-weight: 500; font-size: 12px; color: var(--color-text-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .kpi-table td { padding: 8px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+  .kpi-table tr:last-child td { border-bottom: none; }
+</style>
+
+<h2 class="sr-only">RXS Meta Group of Companies — Full Marketing Strategy and AI Automation Playbook</h2>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="show('positioning')">Positioning</button>
+  <button class="nav-btn" onclick="show('icp')">ICP & Targets</button>
+  <button class="nav-btn" onclick="show('channels')">Channels</button>
+  <button class="nav-btn" onclick="show('content')">Content System</button>
+  <button class="nav-btn" onclick="show('lead')">Lead Gen</button>
+  <button class="nav-btn" onclick="show('automation')">AI Agents</button>
+  <button class="nav-btn" onclick="show('kpis')">KPIs</button>
+</div>
+
+<div id="positioning" class="page active">
+  <div class="section-label">Brand Positioning</div>
+  <div class="headline">RXS Meta: The ESG-Driven AI Consultancy for Business Leaders</div>
+  <div class="subtext">Yen Roxas and RXS Meta occupy a rare intersection: tech depth, ESG credibility, and founder-level access. The strategy must make this intersection unmissable to the right buyers.</div>
+
+  <div class="accent-bar"></div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">AI+ESG</div><div class="metric-lbl">Core differentiator</div></div>
+    <div class="metric"><div class="metric-val">BGC HQ</div><div class="metric-lbl">Premium positioning</div></div>
+    <div class="metric"><div class="metric-val">B2B+Gov</div><div class="metric-lbl">Dual market play</div></div>
+    <div class="metric"><div class="metric-val">Founder-led</div><div class="metric-lbl">Authority brand</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Brand Promise</div>
+      <div class="card-body">We help Philippine and Southeast Asian businesses grow profitably while building measurable ESG impact — using AI, SaaS, and custom tech as the engine.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Core Narrative</div>
+      <div class="card-body">"Innovation with Purpose" — not just a tagline. Every service offering anchors to both business ROI and responsible impact. This should be the filter for all content, partnerships, and pitches.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Competitive moat</div>
+      <div class="card-body">Yen Roxas as a media-visible, advocacy-driven founder creates a trust moat that pure tech firms cannot replicate. Double down on her personal brand as the primary growth lever.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Positioning gap to close</div>
+      <div class="card-body">The website reads broad. The market needs to understand what RXS Meta solves — sharpen the homepage around 2–3 flagship outcomes (e.g., "We help hospitality and education companies deploy AI in 90 days").</div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top: 0.5rem;">Key messages by audience</div>
+  <div class="card"><div class="card-title">For enterprise decision-makers</div><div class="card-body">Reduce operational costs and regulatory risk simultaneously with AI-powered ESG compliance tools and SaaS infrastructure built for Philippine context.</div></div>
+  <div class="card"><div class="card-title">For government & LGUs</div><div class="card-body">Leverage Smart Campus and community empowerment tech to accelerate national development mandates with proven private-sector execution.</div></div>
+  <div class="card"><div class="card-title">For SMEs</div><div class="card-body">Access enterprise-grade tech — hotel management, procurement, loyalty systems — through scalable SaaS without the CAPEX of building in-house.</div></div>
+</div>
+
+<div id="icp" class="page">
+  <div class="section-label">Ideal Customer Profiles</div>
+  <div class="headline">Who to target — and with what offer</div>
+  <div class="subtext">RXS Meta has multiple service lines. Each needs a distinct ICP and messaging track. Below are the four highest-value segments.</div>
+
+  <div class="card priority-high">
+    <div class="tool-header">
+      <div class="card-title">ICP 1 — Philippine Enterprise (Hotels, Schools, Hospitals)</div>
+      <span class="pill pill-orange">Highest priority</span>
+    </div>
+    <div class="card-body">Decision-maker: COO, CTO, or VP Operations. Pain: manual ops, no ESG reporting, siloed systems. Offer: Hotel, Facilities, or School Management SaaS + AI overlay. Deal size: ₱500K–₱5M+ annually.</div>
+    <div class="tag-row"><span class="pill pill-gray">BGC / Makati HQs</span><span class="pill pill-gray">50–500 employees</span><span class="pill pill-gray">Growth stage</span></div>
+  </div>
+
+  <div class="card priority-high">
+    <div class="tool-header">
+      <div class="card-title">ICP 2 — Conglomerates needing ESG compliance tech</div>
+      <span class="pill pill-orange">High priority</span>
+    </div>
+    <div class="card-body">SEC and BSP are pushing ESG disclosure for listed companies. RXS Meta can become the go-to ESG tech + consulting partner for Philippine conglomerates needing reporting infrastructure. Decision-maker: Sustainability Officer, CFO.</div>
+    <div class="tag-row"><span class="pill pill-gray">Listed PH companies</span><span class="pill pill-gray">SEC-mandated ESG</span><span class="pill pill-gray">Ayala, SM, JG Summit ecosystem</span></div>
+  </div>
+
+  <div class="card priority-med">
+    <div class="tool-header">
+      <div class="card-title">ICP 3 — Government agencies & LGUs (Smart Gov)</div>
+      <span class="pill pill-teal">Medium-high</span>
+    </div>
+    <div class="card-body">DICT, DepEd, DOT, and LGUs with Smart City mandates. Entry through advocacy credibility (Yen's media presence) and co-creation. Slow sales cycle but large contract values and reputational upside.</div>
+    <div class="tag-row"><span class="pill pill-gray">Smart Campus</span><span class="pill pill-gray">E-governance</span><span class="pill pill-gray">Tourism tech</span></div>
+  </div>
+
+  <div class="card priority-low">
+    <div class="tool-header">
+      <div class="card-title">ICP 4 — ASEAN Mid-Market via Partner Channel</div>
+      <span class="pill pill-teal">Expansion play</span>
+    </div>
+    <div class="card-body">ServeDeck (Malaysia), Cardtrend (loyalty), PrinceTech (PH) are already partners. Build a co-sell motion: RXS Meta wraps consulting and customization around partner SaaS for regional clients. Lower CAC through partner referrals.</div>
+    <div class="tag-row"><span class="pill pill-gray">Malaysia</span><span class="pill pill-gray">Singapore</span><span class="pill pill-gray">Vietnam</span></div>
+  </div>
+</div>
+
+<div id="channels" class="page">
+  <div class="section-label">Go-to-Market Channels</div>
+  <div class="headline">Where to show up and how</div>
+  <div class="subtext">A founder-led brand like RXS Meta wins through authority content, executive relationships, and media presence — not ads. Here's the channel stack ranked by expected ROI.</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">LinkedIn — Yen Roxas personal brand (primary growth engine)</div>
+      <div class="step-desc">Yen already has media visibility. LinkedIn is where Philippine C-suite and government decision-makers are. Post 4x/week: mix of thought leadership on AI+ESG, case study proof points, advocacy stories, and industry commentary. Target: 10K followers in 6 months. This is the #1 pipeline driver.</div>
+      <div class="tag-row"><span class="pill pill-orange">Highest ROI</span><span class="pill pill-gray">Personal brand</span><span class="pill pill-gray">B2B pipeline</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Podcast & Media appearances (earned media)</div>
+      <div class="step-desc">Already proven: DZME, DZRH, Net25, Kada Umaga. Scale this systematically. Target 2 media appearances per month. Pitch: "How AI is changing ESG for Philippine businesses." Create a speaker one-pager and pitch deck specifically for media bookers.</div>
+      <div class="tag-row"><span class="pill pill-orange">High authority</span><span class="pill pill-gray">Earned media</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Conference & speaking circuit (PCCI, IBPAP, DICT events)</div>
+      <div class="step-desc">The Philippine AI and business community conferences are the fastest path to enterprise and government decision-makers. Apply to speak at PCCI, MAP, IBPAP, DICT-convened AI forums, and ASEAN business summits quarterly. Bring a live demo of one SaaS product.</div>
+      <div class="tag-row"><span class="pill pill-purple">Relationship channel</span><span class="pill pill-gray">Gov access</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">YouTube — "Great Lakes" format expanded to AI in Business</div>
+      <div class="step-desc">The motorcycle adventure series shows Yen can do long-form content. Apply the same format to a business/tech show: "AI in the Field" — visiting Philippine businesses and showing how AI transforms their operations. Target: 1 episode/month, SEO-optimized titles.</div>
+      <div class="tag-row"><span class="pill pill-teal">Content moat</span><span class="pill pill-gray">SEO long-term</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">Outbound: ABM (Account-Based Marketing) via Clay</div>
+      <div class="step-desc">Build a list of 200 target accounts across hotels, schools, and hospitals in PH. Use Clay to enrich contacts, find the right decision-maker, and trigger a personalized 3-touch email sequence referencing their specific ESG or ops challenge. Volume: 50 targeted outreaches/week.</div>
+      <div class="tag-row"><span class="pill pill-blue">Pipeline</span><span class="pill pill-gray">Outbound</span><span class="pill pill-gray">Clay-powered</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <div class="step-title">Partner co-marketing with ServeDeck, Cardtrend, PrinceTech</div>
+      <div class="step-desc">Co-host webinars, co-author whitepapers, and co-exhibit at trade shows with existing tech partners. Each partner brings their own client base — cross-sell RXS Meta's consulting layer on top of the tech.</div>
+      <div class="tag-row"><span class="pill pill-teal">Low CAC</span><span class="pill pill-gray">Partner channel</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="content" class="page">
+  <div class="section-label">Content System</div>
+  <div class="headline">Content pillars and production cadence</div>
+  <div class="subtext">RXS Meta needs a content system that generates authority, trust, and pipeline — consistently. Here are the 5 pillars and a weekly rhythm.</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Pillar 1 — AI in Philippine Business</div>
+      <div class="card-body">Weekly insight on how AI is reshaping hospitality, education, logistics, or government in the PH context. Formats: LinkedIn text post, short-form video, carousel. Angle: practical, local, actionable — not generic AI hype.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pillar 2 — ESG Made Measurable</div>
+      <div class="card-body">Demystify ESG for Philippine businesses. What SEC mandates. How to start reporting. Tools and frameworks. Positions RXS Meta as the go-to guide for ESG compliance tech — a blue ocean in the PH market.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pillar 3 — Client Proof & Case Studies</div>
+      <div class="card-body">Document real transformations: before/after metrics, ROI achieved, challenges solved. Even anonymized mini-cases build trust. One per month, repurposed across all channels.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pillar 4 — Yen's Advocacy & Leadership</div>
+      <div class="card-body">Responsible riding, education, health, and community stories. This humanizes the brand and builds mass appeal beyond the enterprise buyer. Keeps media relationships warm.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pillar 5 — Tech Deep Dives</div>
+      <div class="card-body">Explainers on AR/VR, Blockchain, Metaverse, AI loyalty programs. Establishes thought leadership with the tech-savvy segment and drives inbound interest from innovation-minded buyers.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Weekly production rhythm</div>
+      <div class="card-body">Mon: LinkedIn thought piece (Pillar 1 or 2) — Tue: Short-form video/Reel — Wed: Partner or advocacy spotlight — Thu: LinkedIn engagement (reply, comment, reshare) — Fri: Newsletter digest + 1 case study per month</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-label">Content upgrade recommendations</div>
+  <div class="step"><div class="step-num">!</div><div class="step-content"><div class="step-title">Create a flagship lead magnet</div><div class="step-desc">A downloadable "Philippine Business AI Readiness Assessment" or "ESG Starter Checklist for PH Companies" — gated behind email. Builds the newsletter list and qualifies inbound leads simultaneously.</div></div></div>
+  <div class="step"><div class="step-num">!</div><div class="step-content"><div class="step-title">Launch a newsletter</div><div class="step-desc">"The RXS Intel" — bi-weekly email covering AI + ESG news for Philippine business leaders. Repurpose existing LinkedIn content. Use Beehiiv or Substack. Target: 1,000 subscribers in 90 days.</div></div></div>
+  <div class="step"><div class="step-num">!</div><div class="step-content"><div class="step-title">Refresh website messaging</div><div class="step-desc">Current homepage is visual but vague. Add a results section ("We've helped X clients achieve Y"), a clear services menu with use cases, and client logos. Add SEO landing pages per service vertical.</div></div></div>
+</div>
+
+<div id="lead" class="page">
+  <div class="section-label">Lead Generation System</div>
+  <div class="headline">Inbound + outbound pipeline architecture</div>
+  <div class="subtext">A dual-track system: inbound authority content pulls warm leads, outbound ABM hunts cold prospects. Both tracks feed into a CRM-driven nurture sequence.</div>
+
+  <div class="section-label" style="margin-top: 0;">Inbound track</div>
+  <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">LinkedIn content → profile visits → DM inquiry</div><div class="step-desc">Optimize Yen's LinkedIn profile with a strong CTA ("Schedule a 30-min strategy call"). Every post drives profile traffic. Target: 10 qualified DMs per week from content alone.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Lead magnet → email nurture → consultation booking</div><div class="step-desc">The AI readiness assessment or ESG checklist captures emails. Automate a 5-email sequence: deliver value, share case studies, overcome objections, and CTA to book a call. Use ActiveCampaign or MailerLite.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Media appearances → website traffic → CTA conversion</div><div class="step-desc">Every radio/TV appearance drives search spikes. Ensure rxsmeta.com has fast load time, a clear "Let's Talk" form, and a Calendly embed. Capture the spike.</div></div></div>
+
+  <hr class="divider">
+  <div class="section-label">Outbound track (Clay-powered ABM)</div>
+  <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Build target account list in Clay</div><div class="step-desc">250 accounts across 5 verticals: Hotels (Cebu/BGC), Private schools (Metro Manila), Hospitals (private networks), Facilities companies, Listed PH conglomerates. Enrich with decision-maker contacts, LinkedIn URLs, and recent news.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Personalized 3-touch email sequence</div><div class="step-desc">Touch 1: "Saw you're expanding [X property] — here's how [competitor type] cut ops cost by 30% with facilities AI." Touch 2: ESG compliance angle. Touch 3: Direct ask for 20-min call. Personalize using Clay enrichment data.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">LinkedIn connection + warm message sequence</div><div class="step-desc">Parallel to email: connect with decision-makers on LinkedIn with a personalized note. Send a value message (not a pitch) after connection. Reference shared interests or advocacy if visible on their profile.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">CRM pipeline management (HubSpot or Pipedrive)</div><div class="step-desc">All leads — inbound and outbound — flow into a CRM. Stages: Identified → Contacted → Interested → Proposal → Closed. Weekly pipeline review. Automate follow-up reminders and drip sequences per stage.</div></div></div>
+</div>
+
+<div id="automation" class="page">
+  <div class="section-label">AI Agents & Automation Stack</div>
+  <div class="headline">Best tools for RXS Meta — by function</div>
+  <div class="subtext">RXS Meta is an AI consultancy — its own internal stack should be a living proof-of-concept for clients. Here's the recommended automation architecture.</div>
+
+  <div class="section-label" style="margin-top: 0;">Tier 1 — Core sales & marketing automation</div>
+
+  <div class="tool-card priority-high">
+    <div class="tool-header"><div class="tool-name">Clay</div><span class="pill pill-orange">Already connected</span></div>
+    <div class="tool-desc">Lead enrichment, ABM list-building, AI-powered personalization at scale. Use for: building target account lists across hotels/schools/hospitals, enriching with decision-maker emails and LinkedIn, and triggering personalized outreach sequences. This is your outbound engine.</div>
+  </div>
+
+  <div class="tool-card priority-high">
+    <div class="tool-header"><div class="tool-name">HubSpot or Pipedrive CRM</div><span class="pill pill-orange">Essential</span></div>
+    <div class="tool-desc">Central pipeline management. Automate lead routing, follow-up reminders, email sequences, and deal stage tracking. HubSpot's free tier is strong; Pipedrive is leaner for a small team. Integrate with Clay for seamless lead flow.</div>
+  </div>
+
+  <div class="tool-card priority-high">
+    <div class="tool-header"><div class="tool-name">Apollo.io or Instantly.ai</div><span class="pill pill-orange">Outbound email</span></div>
+    <div class="tool-desc">Automated cold email sequences at scale with inbox rotation, deliverability optimization, and reply tracking. Use Instantly for high-volume cold outreach (50–100 emails/day). Pair with Clay-enriched lists for maximum personalization.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-label">Tier 2 — Content & social media automation</div>
+
+  <div class="tool-card priority-med">
+    <div class="tool-header"><div class="tool-name">Buffer or Taplio</div><span class="pill pill-teal">Content scheduling</span></div>
+    <div class="tool-desc">Schedule LinkedIn, Facebook, Instagram, and YouTube posts in advance. Taplio is specifically built for LinkedIn authority building — AI-assisted post writing, scheduling, and analytics. Recommended for Yen's personal brand growth.</div>
+  </div>
+
+  <div class="tool-card priority-med">
+    <div class="tool-header"><div class="tool-name">Claude (Anthropic) as content co-pilot</div><span class="pill pill-purple">AI writing</span></div>
+    <div class="tool-desc">Use Claude to generate first drafts of LinkedIn posts, case study writeups, newsletter editions, email sequences, and website copy — all trained on RXS Meta's brand voice. Cuts content production time by 70%.</div>
+  </div>
+
+  <div class="tool-card priority-med">
+    <div class="tool-header"><div class="tool-name">Beehiiv or Substack</div><span class="pill pill-teal">Newsletter</span></div>
+    <div class="tool-desc">Launch "The RXS Intel" newsletter. Beehiiv has strong growth tools and referral programs. Automate welcome sequences, segment subscribers by interest (ESG vs. AI tech), and track opens/clicks to identify hot leads.</div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-label">Tier 3 — Operations & client delivery automation</div>
+
+  <div class="tool-card priority-med">
+    <div class="tool-header"><div class="tool-name">Make (Integromat) or n8n</div><span class="pill pill-blue">Workflow automation</span></div>
+    <div class="tool-desc">The backbone of RXS Meta's internal automation. Connect CRM → Clay → email → Slack → calendar. Automate: new lead notifications, proposal generation triggers, client onboarding checklists, and reporting workflows. n8n is self-hostable and ideal for an AI-forward consultancy.</div>
+  </div>
+
+  <div class="tool-card priority-med">
+    <div class="tool-header"><div class="tool-name">Notion + Notion AI</div><span class="pill pill-blue">Knowledge & ops</span></div>
+    <div class="tool-desc">Central knowledge base for RXS Meta: SOPs, client deliverables, project management, and research. Notion AI can auto-summarize meeting notes, generate project briefs, and search across all internal docs — great for a growing consulting team.</div>
+  </div>
+
+  <div class="tool-card priority-low">
+    <div class="tool-header"><div class="tool-name">Custom AI Agent (LangGraph / Claude API)</div><span class="pill pill-purple">Flagship product demo</span></div>
+    <div class="tool-desc">Build an internal AI agent that handles: inbound inquiry triage, meeting scheduling, proposal drafting from a template, and ESG assessment scoring. This doubles as a live demo for enterprise prospects — "this is what we can build for you."</div>
+  </div>
+
+  <div class="tool-card priority-low">
+    <div class="tool-header"><div class="tool-name">Gamma or Beautiful.ai</div><span class="pill pill-gray">Pitch decks</span></div>
+    <div class="tool-desc">AI-powered presentation generation. Use for rapid proposal decks and pitch materials tailored to each prospect. Dramatically reduces time-to-proposal for the sales team.</div>
+  </div>
+</div>
+
+<div id="kpis" class="page">
+  <div class="section-label">Success Metrics</div>
+  <div class="headline">KPI framework — 90-day and 12-month targets</div>
+  <div class="subtext">Marketing without measurement is expensive guessing. Track these metrics weekly to know what's working.</div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">90d</div><div class="metric-lbl">Quick-win horizon</div></div>
+    <div class="metric"><div class="metric-val">6mo</div><div class="metric-lbl">Momentum horizon</div></div>
+    <div class="metric"><div class="metric-val">12mo</div><div class="metric-lbl">Scale horizon</div></div>
+  </div>
+
+  <table class="kpi-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>90-day target</th>
+        <th>12-month target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>LinkedIn followers (Yen)</td><td>+2,000</td><td>+10,000</td></tr>
+      <tr><td>LinkedIn post impressions/week</td><td>5,000</td><td>30,000</td></tr>
+      <tr><td>Newsletter subscribers</td><td>500</td><td>3,000</td></tr>
+      <tr><td>Inbound consultation requests/mo</td><td>8</td><td>30</td></tr>
+      <tr><td>Outbound emails sent/week</td><td>50</td><td>150</td></tr>
+      <tr><td>Qualified pipeline value (₱)</td><td>₱5M</td><td>₱30M</td></tr>
+      <tr><td>New clients closed</td><td>2–3</td><td>12–15</td></tr>
+      <tr><td>Media appearances</td><td>3</td><td>18</td></tr>
+      <tr><td>Speaking engagements</td><td>2</td><td>8</td></tr>
+      <tr><td>Partner co-sell referrals</td><td>3</td><td>15</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+  <div class="section-label">90-day priority actions</div>
+  <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Week 1–2: Foundation</div><div class="step-desc">Optimize Yen's LinkedIn profile and rxsmeta.com homepage. Set up HubSpot CRM. Install Taplio. Create the lead magnet (AI Readiness Assessment). Set up Beehiiv newsletter.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Week 3–4: Content engine live</div><div class="step-desc">Launch weekly LinkedIn posting cadence (4x/week). Send first newsletter edition. Build Clay ABM list of 250 target accounts. Set up Instantly.ai for outbound sequences.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Month 2: Pipeline activation</div><div class="step-desc">First outbound ABM wave live (50 accounts/week). First webinar hosted with a tech partner. Pitch 3 media outlets. Submit speaker applications to 2 conferences.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Month 3: Optimize and scale</div><div class="step-desc">Review CRM pipeline data. Double down on what's converting. Launch the custom AI agent demo. First case study published. Target first enterprise deal close.</div></div></div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
